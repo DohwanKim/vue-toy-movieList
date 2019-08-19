@@ -6,7 +6,7 @@
     <TabView :selectTab="selectTab" v-if="visibleList.TabView" @change="changeTab"/>
     <RankView v-if="visibleList.RankView"/>
     <HistoryView v-if="visibleList.HistoryView"/>
-    <ResultView v-if="visibleList.ResultView"/>
+    <ResultView v-if="visibleList.ResultView" :title="title"/>
   </div>
 </div>
 </template>
@@ -47,7 +47,7 @@ export default {
     },
     searchMovie(data){
       //Todo Search
-      console.log('search', this.title)
+      this.visibleList.ResultView = true;
     },
     changeTab(data){
       this.selectTab = data;
@@ -65,13 +65,14 @@ export default {
           HistoryView : false,
           ResultView : false,
         }
+        this.selectTab = 0;
       }else{
         this.visibleList = {
           HeaderView : false,
           TabView : false,
           RankView : false,
           HistoryView : false,
-          ResultView : true,
+          ResultView : false,
         }
       }
     }
@@ -431,20 +432,18 @@ footer span i {
 .posterContainer{
   margin-top: 15px;
   width: 100%;
-  height:450px;
-  display: flex;
+  display: block;
 }
 
 .posterBox{
   background-color: white;
-  width:50%;
-  height:100%;
   margin:0px auto;
+  display: block;
 }
 .posterLab{
-  width:50%;
+  width:300px;
   margin:0px auto;
-  display:flex;
+  display: block;
 }
 .poster{
   height:80%;
